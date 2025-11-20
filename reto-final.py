@@ -21,13 +21,25 @@ plt.savefig("pokemons_por_generacion.png")
 plt.show()
 
 # Gráfico 2
+
+# He tenido que hacer el map para que a la hora de mostrar la leyenda
+# puesta manualmente salagan ambos colores
+
+df['is_legendary'] = df['is_legendary'].map({0: "No", 1: "Sí"})
+
 plt.figure(figsize=(10,6))
-sns.scatterplot(data=df, x='Total', y='speed', hue='is_legendary', 
-                palette={0: "blue", 1: "red"})
+sns.scatterplot(
+    data=df,
+    x='Total',
+    y='speed',
+    hue='is_legendary',
+    palette={"No": "red", "Sí": "blue"}
+)
+
 plt.title("Relación entre Total de estadísticas y Velocidad")
 plt.xlabel("Estadísticas totales (Total)")
 plt.ylabel("Velocidad (Speed)")
-plt.legend(title="Legendario", labels=['No', 'Sí'])
+plt.legend(title="Legendario")
 plt.tight_layout()
 plt.savefig("total_vs_speed_legendary.png")
 plt.show()
